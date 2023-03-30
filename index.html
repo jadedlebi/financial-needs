@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Financial Needs Index - NCRC</title>
+    <meta name='robots' content='noindex, nofollow'>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.min.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.css' type='text/css' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        h2, h3 {
+            margin: 10px;
+            font-size: 1.4em;
+        }
+        h3 {
+            font-size: 1em;
+        }
+        p {
+            font-size: 0.85em;
+            margin: 10px;
+            text-align: left;
+        }
+        #map { 
+            position:absolute; 
+            top:0; 
+            bottom:0; 
+            width:100%; 
+        }
+        .map-overlay {
+            position: fixed;
+            right: 40px;
+            bottom: 40px;
+            height: 95px;
+            background-color: rgba(255, 255, 255, .9);
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: black;
+            padding: 2px;
+            z-index: 1;
+        }
+        #features {
+            top: 0;
+            height: 450px;
+            margin-top: 20px;
+            width: 150px;
+        }
+       
+        #legend {
+            border-radius: 2%;
+            padding: 15px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.30);
+            line-height: 15px;
+            height: 120px;
+            width: 130px;
+        }
+
+        .legend-key {
+            border-radius: 20%;
+            display: inline-block;
+            height: 10px;
+            width: 20px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<style>
+        .mapboxgl-popup {
+            max-width: 120px;
+            font: 14px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+            border-radius: 2%;
+        }
+</style>
+
+<nav id="menu"></nav>
+<div id='map'></div>
+<div class='map-overlay' id='legend'>
+    <h4 style='margin-top:8px'>Financial Needs Index</h4>
+</div>
+
+<script>
+
+mapboxgl.accessToken = 'pk.eyJ1IjoiamVkbGViaSIsImEiOiJjanhhc3M4NnYwMmxsM3lyODlxYTFhOGRxIn0.746AmyW45uwRPeUy1PczOg';
+
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/jedlebi/cku2skjsw2o5817r19li2o5y1', 
+    projection: {
+            name: 'mercator'
+        },
+    center: [-96, 37.8],
+    zoom: 3
+});
+var popup1 = new mapboxgl.Popup({
+    closeButton: true,
+    closeOnClick: false
+});
+
+map.on('load', function () {
+    // Washington, DC
+    map.fitBounds([[-77.493555, 38.724826], [-76.643236, 39.083450]]);
+        
+    // NCRC logo
+    // document.getElementById('logo').innerHTML = "<img src='./ncrc.png'>"
+
+    // make a pointer cursor
+    map.getCanvas().style.cursor = 'default';
+
+
+    // define layer names
+    var layers = ['Very Low','Low','Medium','High', 'Very High'];
+    var colors = ['#2670c5', '#5cd6ff', '#FFE4C4', '#ff968f', '#c31f13'];
+
+    // Round values to nearest whole integer and include thousand seperators.
+    function round(num) {
+      return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+      // console.log((typeof num).concat(', ', num))
+      // return num
+    }
+    // Round values to nearest second decimal and include thousand seperators.
+    function decimalRound(num) {
+      return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    }
+
+    // Convert meters to miles
+    function mileConvert(meters) {
+      const miles = meters / 1609.344; // 1 mile = 1609.344 meters
+      return miles.toFixed(2); // round to 2 decimal places
+    }
+
+    // add source layers.
+    map.addSource("fni-null", {
+      type: "vector",
+      url: 'mapbox://jedlebi.1ovxbdnt'
+    });
+    map.addSource("fni-NE", {
+      type: "vector",
+      url: 'mapbox://jedlebi.djn4cy7j'
+    });
+    map.addSource("fni-GLakes", {
+      type: "vector",
+      url: 'mapbox://jedlebi.2362g7nm'
+    });
+    map.addSource("fni-GPlains", {
+      type: "vector",
+      url: 'mapbox://jedlebi.7z4zs9ba'
+    });
+    map.addSource("fni-MidAtl", {
+      type: "vector",
+      url: 'mapbox://jedlebi.40iaxn6i'
+    });
+    map.addSource("fni-South", {
+      type: "vector",
+      url: 'mapbox://jedlebi.8m78bsmb'
+    });
+    map.addSource("fni-Gulf", {
+      type: "vector",
+      url: 'mapbox://jedlebi.3akepc1b'
+    });
+    map.addSource("fni-Pacific", {
+      type: "vector",
+      url: 'mapbox://jedlebi.covnq0v3'
+    });
+    map.addSource("fni-Rockies", {
+      type: "vector",
+      url: 'mapbox://jedlebi.0m1p1reo'
+    });
+    map.addSource("fni-CA", {
+      type: "vector",
+      url: 'mapbox://jedlebi.43f1jld8'
+    });
+
+    // add source layers to map with properties.
+    map.addLayer({
+      id: "fni-null",
+      type: "fill",
+      source: 'fni-null',
+      "source-layer": 'FNI_NULL-74mvan',
+      paint: {
+        "fill-outline-color": "transparent",
+        "fill-color": [
+          "case",
+          ['all', ['==', ['get', 'FNI'], null], ['==', ['get', 'FNI'], null]], "#000000",
+          ['all', ['>=', ['get', 'FNI'], -1.085833], ['<=', ['get', 'FNI'], -0.444064]], "#2670c5",
+          ['all', ['>=', ['get', 'FNI'], -0.444063], ['<=', ['get', 'FNI'], -0.206439]], "#5cd6ff",
+          ['all', ['>=', ['get', 'FNI'], -0.206438], ['<=', ['get', 'FNI'], 0.065833]], "#FFE4C4",
+          ['all', ['>=', ['get', 'FNI'], 0.065834], ['<=', ['get', 'FNI'], 0.454639]], "#ff968f",
+          ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
+          "#A1A3A9"
+        ],
+        "fill-opacity": 0.3
+      },
+    });
+    map.addLayer({
+      id: "fni-NE",
+      type: "fill",
+      source: 'fni-NE',
+      "source-layer": 'FNI_NE-at1aog',
+      paint: {
+        "fill-outline-color": "transparent",
+        "fill-color": [
+          "case",
+          ['all', ['==', ['get', 'FNI'], null], ['==', ['get', 'FNI'], null]], "#000000",
+          ['all', ['>=', ['get', 'FNI'], -1.085833], ['<=', ['get', 'FNI'], -0.444064]], "#2670c5",
+          ['all', ['>=', ['get', 'FNI'], -0.444063], ['<=', ['get', 'FNI'], -0.206439]], "#5cd6ff",
+          ['all', ['>=', ['get', 'FNI'], -0.206438], ['<=', ['get', 'FNI'], 0.065833]], "#FFE4C4",
+          ['all', ['>=', ['get', 'FNI'], 0.065834], ['<=', ['get', 'FNI'], 0.454639]], "#ff968f",
+          ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
+          "#A1A3A9"
+        ],
+        "fill-opacity": 0.3
+      },
+    });
+    map.addLayer({
+      id: "fni-GLakes",
+      type: "fill",
+      source: 'fni-GLakes',
+      "source-layer": 'FNI_GLakes-8wt2ot',
+      paint: {
+        "fill-outline-color": "transparent",
+        "fill-color": [
+          "case",
+          ['all', ['==', ['get', 'FNI'], null], ['==', ['get', 'FNI'], null]], "#000000",
+          ['all', ['>=', ['get', 'FNI'], -1.085833], ['<=', ['get', 'FNI'], -0.444064]], "#2670c5",
+          ['all', ['>=', ['get', 'FNI'], -0.444063], ['<=', ['get', 'FNI'], -0.206439]], "#5cd6ff",
+          ['all', ['>=', ['get', 'FNI'], -0.206438], ['<=', ['get', 'FNI'], 0.065833]], "#FFE4C4",
+          ['all', ['>=', ['get', 'FNI'], 0.065834], ['<=', ['get', 'FNI'], 0.454639]], "#ff968f",
+          ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
+          "#A1A3A9"
+        ],
+        "fill-opacity": 0.3
+      },
+    });
+    map.addLayer({
+      id: "fni-GPlains",
+      type: "fill",
+      source: 'fni-GPlains',
+      "source-layer": 'FNI_GPlains-3ehl8g',
+      paint: {
+        "fill-outline-color": "transparent",
+        "fill-color": [
+          "case",
+          ['all', ['==', ['get', 'FNI'], null], ['==', ['get', 'FNI'], null]], "#000000",
+          ['all', ['>=', ['get', 'FNI'], -1.085833], ['<=', ['get', 'FNI'], -0.444064]], "#2670c5",
+          ['all', ['>=', ['get', 'FNI'], -0.444063], ['<=', ['get', 'FNI'], -0.206439]], "#5cd6ff",
+          ['all', ['>=', ['get', 'FNI'], -0.206438], ['<=', ['get', 'FNI'], 0.065833]], "#FFE4C4",
+          ['all', ['>=', ['get', 'FNI'], 0.065834], ['<=', ['get', 'FNI'], 0.454639]], "#ff968f",
+          ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
+          "#A1A3A9"
+        ],
+        "fill-opacity": 0.3
+      },
+    });
+    map.addLayer({
+      id: "fni-MidAtl",
+      type: "fill",
+      source: 'fni-MidAtl',
+      "source-layer": 'FNI_MidAtl-47pwlh',
+      paint: {
+        "fill-outline-color": "transparent",
+        "fill-color": [
+          "case",
+          ['all', ['==', ['get', 'FNI'], null], ['==', ['get', 'FNI'], null]], "#000000",
+          ['all', ['>=', ['get', 'FNI'], -1.085833], ['<=', ['get', 'FNI'], -0.444064]], "#2670c5",
+          ['all', ['>=', ['get', 'FNI'], -0.444063], ['<=', ['get', 'FNI'], -0.206439]], "#5cd6ff",
+          ['all', ['>=', ['get', 'FNI'], -0.206438], ['<=', ['get', 'FNI'], 0.065833]], "#FFE4C4",
+          ['all', ['>=', ['get', 'FNI'], 0.065834], ['<=', ['get', 'FNI'], 0.454639]], "#ff968f",
+          ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
+          "#A1A3A9"
+        ],
+        "fill-opacity": 0.3
+      },
+    });
+    map.addLayer({
+      id: "fni-South",
+      type: "fill",
+      source: 'fni-South',
+      "source-layer": 'FNI_SOUTH-8olszi',
+      paint: {
+        "fill-outline-color": "transparent",
+        "fill-color": [
+          "case",
+          ['all', ['==', ['get', 'FNI'], null], ['==', ['get', 'FNI'], null]], "#000000",
+          ['all', ['>=', ['get', 'FNI'], -1.085833], ['<=', ['get', 'FNI'], -0.444064]], "#2670c5",
+          ['all', ['>=', ['get', 'FNI'], -0.444063], ['<=', ['get', 'FNI'], -0.206439]], "#5cd6ff",
+          ['all', ['>=', ['get', 'FNI'], -0.206438], ['<=', ['get', 'FNI'], 0.065833]], "#FFE4C4",
+          ['all', ['>=', ['get', 'FNI'], 0.065834], ['<=', ['get', 'FNI'], 0.454639]], "#ff968f",
+          ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
+          "#A1A3A9"
+        ],
+        "fill-opacity": 0.3
+      },
+    });
+    map.addLayer({
+      id: "fni-Gulf",
+      type: "fill",
+      source: 'fni-Gulf',
+      "source-layer": 'FNI_Gulf-1va4rd',
+      paint: {
+        "fill-outline-color": "transparent",
+        "fill-color": [
+          "case",
+          ['all', ['==', ['get', 'FNI'], null], ['==', ['get', 'FNI'], null]], "#000000",
+          ['all', ['>=', ['get', 'FNI'], -1.085833], ['<=', ['get', 'FNI'], -0.444064]], "#2670c5",
+          ['all', ['>=', ['get', 'FNI'], -0.444063], ['<=', ['get', 'FNI'], -0.206439]], "#5cd6ff",
+          ['all', ['>=', ['get', 'FNI'], -0.206438], ['<=', ['get', 'FNI'], 0.065833]], "#FFE4C4",
+          ['all', ['>=', ['get', 'FNI'], 0.065834], ['<=', ['get', 'FNI'], 0.454639]], "#ff968f",
+          ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
+          "#A1A3A9"
+        ],
+        "fill-opacity": 0.3
+      },
+    });
+    map.addLayer({
+      id: "fni-Pacific",
+      type: "fill",
+      source: 'fni-Pacific',
+      "source-layer": 'FNI_Pacific-3tfeid',
+      paint: {
+        "fill-outline-color": "transparent",
+        "fill-color": [
+          "case",
+          ['all', ['==', ['get', 'FNI'], null], ['==', ['get', 'FNI'], null]], "#000000",
+          ['all', ['>=', ['get', 'FNI'], -1.085833], ['<=', ['get', 'FNI'], -0.444064]], "#2670c5",
+          ['all', ['>=', ['get', 'FNI'], -0.444063], ['<=', ['get', 'FNI'], -0.206439]], "#5cd6ff",
+          ['all', ['>=', ['get', 'FNI'], -0.206438], ['<=', ['get', 'FNI'], 0.065833]], "#FFE4C4",
+          ['all', ['>=', ['get', 'FNI'], 0.065834], ['<=', ['get', 'FNI'], 0.454639]], "#ff968f",
+          ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
+          "#A1A3A9"
+        ],
+        "fill-opacity": 0.3
+      },
+    });
+    map.addLayer({
+      id: "fni-Rockies",
+      type: "fill",
+      source: 'fni-Rockies',
+      "source-layer": 'FNI_Rockies-cwqx74',
+      paint: {
+        "fill-outline-color": "transparent",
+        "fill-color": [
+          "case",
+          ['all', ['==', ['get', 'FNI'], null], ['==', ['get', 'FNI'], null]], "#000000",
+          ['all', ['>=', ['get', 'FNI'], -1.085833], ['<=', ['get', 'FNI'], -0.444064]], "#2670c5",
+          ['all', ['>=', ['get', 'FNI'], -0.444063], ['<=', ['get', 'FNI'], -0.206439]], "#5cd6ff",
+          ['all', ['>=', ['get', 'FNI'], -0.206438], ['<=', ['get', 'FNI'], 0.065833]], "#FFE4C4",
+          ['all', ['>=', ['get', 'FNI'], 0.065834], ['<=', ['get', 'FNI'], 0.454639]], "#ff968f",
+          ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
+          "#A1A3A9"
+        ],
+        "fill-opacity": 0.3
+      },
+    });
+    map.addLayer({
+      id: "fni-CA",
+      type: "fill",
+      source: 'fni-CA',
+      "source-layer": 'FNI_CA-2soszg',
+      paint: {
+        "fill-outline-color": "transparent",
+        "fill-color": [
+          "case",
+          ['all', ['==', ['get', 'FNI'], null], ['==', ['get', 'FNI'], null]], "#000000",
+          ['all', ['>=', ['get', 'FNI'], -1.085833], ['<=', ['get', 'FNI'], -0.444064]], "#2670c5",
+          ['all', ['>=', ['get', 'FNI'], -0.444063], ['<=', ['get', 'FNI'], -0.206439]], "#5cd6ff",
+          ['all', ['>=', ['get', 'FNI'], -0.206438], ['<=', ['get', 'FNI'], 0.065833]], "#FFE4C4",
+          ['all', ['>=', ['get', 'FNI'], 0.065834], ['<=', ['get', 'FNI'], 0.454639]], "#ff968f",
+          ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
+          "#A1A3A9"
+        ],
+        "fill-opacity": 0.3
+      },
+    });
+    // "source-layer": 'FNI_NULL-74mvan,FNI_NE-at1aog,FNI_GLakes-8wt2ot,FNI_GPlains-3ehl8g,
+    // FNI_MidAtl-47pwlh,FNI_SOUTH-8olszi,FNI_Gulf-1va4rd,FNI_Pacific-3tfeid,FNI_Rockies-cwqx74,FNI_CA-2soszg',
+
+    // When a click event occurs on a feature in the layer, 
+    // open a popup at the location of the click, 
+    // with description HTML from its properties.
+    map.on('click', function (e) { 
+        var features = map.queryRenderedFeatures(e.point, { layers: ['fni-NE', 'fni-null','fni-GLakes','fni-GPlains','fni-MidAtl','fni-South','fni-Gulf','fni-Pacific','fni-Rockies','fni-CA'] });
+        var fsn = features[0].properties.FNI 
+        if (fsn == null) {
+                fsni = "<h1 style=line-height:30px;text-align:center;width:100%;color:#6F6C6C>N/A</h1>"
+            } else if (fsn >= -1.085833 && fsn < -0.444063) {
+                fsni = "<h1 style=line-height:30px;text-align:center;width:100%;color:#2670c5>Very Low</h1>"
+            } else if (fsn >= -0.444063 && fsn < -0.206438) {
+                fsni = "<h1 style=line-height:30px;text-align:center;width:100%;color:#5cd6ff>Low</h1>"
+            } else if (fsn >= -0.206438 && fsn < 0.065834) {
+                fsni = "<h1 style=line-height:30px;text-align:center;width:100%;color:#FFE4C4>Medium</h1>"
+            } else if (fsn >= 0.065834 && fsn < 0.454640) {
+                fsni = "<h1 style=line-height:30px;text-align:center;width:100%;color:#ff968f>High</h1>"
+            } else if (fsn >= 0.454640) {
+                fsni = "<h1 style=line-height:30px;text-align:center;width:100%;color:#c31f13>Very High</h1>"
+            } else {
+                null
+            }
+        popup1
+            .setLngLat(e.lngLat)
+            .setHTML(
+            fsni +
+            "<table style='width:100%;text-align:center'>" + 
+                "<tr>" + 
+                    "<th>Block Group</th>" + 
+                    "<th>FNI</th>" + 
+                "</tr>" + 
+                "<tr style='font-size:20px;text-align:center'>" + 
+                    "<th style='width:63%'>" + 
+                        features[0].properties.GEOID20 + 
+                    "</th>" + 
+                    "<th style='width:37%'>" + 
+                        decimalRound(features[0].properties.FNI) + 
+                    "</th>" + 
+                "</tr>" +
+            "</table>" + 
+            "<p></p>" +
+            "<table style='width:100%;text-align:center'>" + 
+                "<tr>" + 
+                    "<th style='width:30%'>Minority Population</th>" + 
+                    "<th style='width:40%'>Population Density</th>" + 
+                    "<th style='width:30%'>Branch Distance</th>" +
+                "</tr>" + 
+                "<tr style='font-size:20px;text-align:center'>" + 
+                    "<th style='width:33%'>" + 
+                        round(features[0].properties.MIN) + "%" +
+                    "</th>" + 
+                    "<th style='width:34%'>" + 
+                        round(features[0].properties.PDEN) + " /mi<sup>2</sup>" +
+                    "</th>" + 
+                    "<th style='width:33%'>" + 
+                        mileConvert(parseFloat(features[0].properties.BDIST)) + " mi" +
+                    "</th>" +
+                "</tr>" +
+            "</table>" +
+            "<p></p>" +
+            "<table style='width:100%;text-align:center'>" + 
+                "<tr>" + 
+                    "<th style='width:50%'>HH with Smartphone</th>" + 
+                    "<th style='width:50%'>HH with Internet Access</th>" + 
+                "</tr>" + 
+                "<tr style='font-size:20px;text-align:center'>" + 
+                    "<th style='width:50%'>" + 
+                        round(parseFloat(features[0].properties.PSPH)) + "%" +
+                    "</th>" + 
+                    "<th style='width:50%'>" + 
+                        round(parseFloat(features[0].properties.PSUBS)) + "%" +
+                    "</th>" +
+                "</tr>" +
+            "</table>"
+            )
+            .addTo(map);
+    });
+
+    // Define an array of layer IDs to apply the event listeners to.
+    var layerIds = ['fni-NE', 'fni-null', 'fni-GLakes', 'fni-GPlains', 'fni-MidAtl', 'fni-South', 'fni-Gulf', 'fni-Pacific', 'fni-Rockies', 'fni-CA'];
+
+    // Loop over the array of layer IDs and add the event listeners to each layer.
+    layerIds.forEach(function(layerId) {
+      // Add a mouseenter event listener to the layer.
+      map.on('mouseenter', layerId, function() {
+        map.getCanvas().style.cursor = 'pointer';
+      });
+      
+      // Add a mouseleave event listener to the layer.
+      map.on('mouseleave', layerId, function() {
+        map.getCanvas().style.cursor = '';
+      });
+    });
+    
+    // Add in option for full-screen.
+    map.addControl(new mapboxgl.FullscreenControl());
+
+    // create legend
+    for (i=0; i<layers.length; i++) {
+       var layer = layers[i];
+       var color = colors[i];
+       var item = document.createElement('div');
+       var key = document.createElement('span');
+       key.className = 'legend-key';
+       key.style.backgroundColor = color;
+ 
+       var value = document.createElement('span');
+          value.innerHTML = layer;
+          item.appendChild(key);
+          item.appendChild(value);
+          legend.appendChild(item);
+    }
+
+});
+
+</script>
+</body>
+</html>
