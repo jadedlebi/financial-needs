@@ -110,6 +110,11 @@ map.on('load', function () {
     // make a pointer cursor
     map.getCanvas().style.cursor = 'default';
 
+    // Add a search bar to the map.
+    map.addControl(new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl: mapboxgl
+    }));
 
     // define layer names
     var layers = ['Very Low','Low','Medium','High', 'Very High'];
