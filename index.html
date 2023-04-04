@@ -7,8 +7,8 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.min.js'></script>
     <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.css' type='text/css' />
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet' />
     <style>
         body { margin:0; padding:0; }
         h2, h3 {
@@ -79,7 +79,7 @@
 <nav id="menu"></nav>
 <div id='map'></div>
 <div class='map-overlay' id='legend'>
-    <h4 style='margin-top:8px'>Financial Needs Index</h4>
+    <h4 style='margin-top:1px'>Financial Needs Index</h4>
 </div>
 
 <script>
@@ -88,7 +88,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiamVkbGViaSIsImEiOiJjanhhc3M4NnYwMmxsM3lyODlxY
 
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/jedlebi/cku2skjsw2o5817r19li2o5y1', 
+    style: 'mapbox://styles/jedlebi/cku2skjsw2o5817r19li2o5y1',
     projection: {
             name: 'mercator'
         },
@@ -103,9 +103,6 @@ var popup1 = new mapboxgl.Popup({
 map.on('load', function () {
     // Washington, DC
     map.fitBounds([[-77.493555, 38.724826], [-76.643236, 39.083450]]);
-        
-    // NCRC logo
-    // document.getElementById('logo').innerHTML = "<img src='./ncrc.png'>"
 
     // make a pointer cursor
     map.getCanvas().style.cursor = 'default';
@@ -197,7 +194,7 @@ map.on('load', function () {
           ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
           "#A1A3A9"
         ],
-        "fill-opacity": 0.3
+        "fill-opacity": 0.5
       },
     });
     map.addLayer({
@@ -217,7 +214,7 @@ map.on('load', function () {
           ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
           "#A1A3A9"
         ],
-        "fill-opacity": 0.3
+        "fill-opacity": 0.5
       },
     });
     map.addLayer({
@@ -237,7 +234,7 @@ map.on('load', function () {
           ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
           "#A1A3A9"
         ],
-        "fill-opacity": 0.3
+        "fill-opacity": 0.5
       },
     });
     map.addLayer({
@@ -257,7 +254,7 @@ map.on('load', function () {
           ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
           "#A1A3A9"
         ],
-        "fill-opacity": 0.3
+        "fill-opacity": 0.5
       },
     });
     map.addLayer({
@@ -277,7 +274,7 @@ map.on('load', function () {
           ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
           "#A1A3A9"
         ],
-        "fill-opacity": 0.3
+        "fill-opacity": 0.5
       },
     });
     map.addLayer({
@@ -297,7 +294,7 @@ map.on('load', function () {
           ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
           "#A1A3A9"
         ],
-        "fill-opacity": 0.3
+        "fill-opacity": 0.5
       },
     });
     map.addLayer({
@@ -317,7 +314,7 @@ map.on('load', function () {
           ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
           "#A1A3A9"
         ],
-        "fill-opacity": 0.3
+        "fill-opacity": 0.5
       },
     });
     map.addLayer({
@@ -337,7 +334,7 @@ map.on('load', function () {
           ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
           "#A1A3A9"
         ],
-        "fill-opacity": 0.3
+        "fill-opacity": 0.5
       },
     });
     map.addLayer({
@@ -357,7 +354,7 @@ map.on('load', function () {
           ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
           "#A1A3A9"
         ],
-        "fill-opacity": 0.3
+        "fill-opacity": 0.5
       },
     });
     map.addLayer({
@@ -377,7 +374,7 @@ map.on('load', function () {
           ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
           "#A1A3A9"
         ],
-        "fill-opacity": 0.3
+        "fill-opacity": 0.5
       },
     });
     
