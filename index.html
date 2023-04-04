@@ -380,8 +380,68 @@ map.on('load', function () {
         "fill-opacity": 0.3
       },
     });
-    // "source-layer": 'FNI_NULL-74mvan,FNI_NE-at1aog,FNI_GLakes-8wt2ot,FNI_GPlains-3ehl8g,
-    // FNI_MidAtl-47pwlh,FNI_SOUTH-8olszi,FNI_Gulf-1va4rd,FNI_Pacific-3tfeid,FNI_Rockies-cwqx74,FNI_CA-2soszg',
+    
+    // Move layers below default road and label layers.
+    map.moveLayer('fni-null', 'road-label');
+    map.moveLayer('fni-null', 'road-primary');
+    map.moveLayer('fni-null', 'road-secondary-tertiary');
+    map.moveLayer('fni-null', 'road-street');
+    map.moveLayer('fni-null', 'water');
+    map.moveLayer('fni-null', 'national-park');
+    map.moveLayer('fni-NE', 'road-label');
+    map.moveLayer('fni-NE', 'road-primary');
+    map.moveLayer('fni-NE', 'road-secondary-tertiary');
+    map.moveLayer('fni-NE', 'road-street');
+    map.moveLayer('fni-NE', 'water');
+    map.moveLayer('fni-NE', 'national-park');
+    map.moveLayer('fni-GLakes', 'road-label');
+    map.moveLayer('fni-GLakes', 'road-primary');
+    map.moveLayer('fni-GLakes', 'road-secondary-tertiary');
+    map.moveLayer('fni-GLakes', 'road-street');
+    map.moveLayer('fni-GLakes', 'water');
+    map.moveLayer('fni-GLakes', 'national-park');
+    map.moveLayer('fni-GPlains', 'road-label');
+    map.moveLayer('fni-GPlains', 'road-primary');
+    map.moveLayer('fni-GPlains', 'road-secondary-tertiary');
+    map.moveLayer('fni-GPlains', 'road-street');
+    map.moveLayer('fni-GPlains', 'water');
+    map.moveLayer('fni-GPlains', 'national-park');
+    map.moveLayer('fni-MidAtl', 'road-label');
+    map.moveLayer('fni-MidAtl', 'road-primary');
+    map.moveLayer('fni-MidAtl', 'road-secondary-tertiary');
+    map.moveLayer('fni-MidAtl', 'road-street');
+    map.moveLayer('fni-MidAtl', 'water');
+    map.moveLayer('fni-MidAtl', 'national-park');
+    map.moveLayer('fni-South', 'road-label');
+    map.moveLayer('fni-South', 'road-primary');
+    map.moveLayer('fni-South', 'road-secondary-tertiary');
+    map.moveLayer('fni-South', 'road-street');
+    map.moveLayer('fni-South', 'water');
+    map.moveLayer('fni-South', 'national-park');
+    map.moveLayer('fni-Gulf', 'road-label');
+    map.moveLayer('fni-Gulf', 'road-primary');
+    map.moveLayer('fni-Gulf', 'road-secondary-tertiary');
+    map.moveLayer('fni-Gulf', 'road-street');
+    map.moveLayer('fni-Gulf', 'water');
+    map.moveLayer('fni-Gulf', 'national-park');
+    map.moveLayer('fni-Pacific', 'road-label');
+    map.moveLayer('fni-Pacific', 'road-primary');
+    map.moveLayer('fni-Pacific', 'road-secondary-tertiary');
+    map.moveLayer('fni-Pacific', 'road-street');
+    map.moveLayer('fni-Pacific', 'water');
+    map.moveLayer('fni-Pacific', 'national-park');
+    map.moveLayer('fni-Rockies', 'road-label');
+    map.moveLayer('fni-Rockies', 'road-primary');
+    map.moveLayer('fni-Rockies', 'road-secondary-tertiary');
+    map.moveLayer('fni-Rockies', 'road-street');
+    map.moveLayer('fni-Rockies', 'water');
+    map.moveLayer('fni-Rockies', 'national-park');
+    map.moveLayer('fni-CA', 'road-label');
+    map.moveLayer('fni-CA', 'road-primary');
+    map.moveLayer('fni-CA', 'road-secondary-tertiary');
+    map.moveLayer('fni-CA', 'road-street');
+    map.moveLayer('fni-CA', 'water');
+    map.moveLayer('fni-CA', 'national-park');
 
     // When a click event occurs on a feature in the layer, 
     // open a popup at the location of the click, 
