@@ -377,6 +377,228 @@ map.on('load', function () {
         "fill-opacity": 0.5
       },
     });
+
+    // add hover layers to map with properties.
+    map.addLayer({
+      id: "fni-null-hover",
+      type: "fill",
+      source: 'fni-null',
+      "source-layer": 'FNI_NULL-74mvan',
+      paint: {
+        "fill-outline-color": "transparent",
+        "fill-color": [
+          "case",
+          ['all', ['==', ['get', 'FNI'], null], ['==', ['get', 'FNI'], null]], "#000000",
+          ['all', ['>=', ['get', 'FNI'], -1.085833], ['<=', ['get', 'FNI'], -0.444064]], "#2670c5",
+          ['all', ['>=', ['get', 'FNI'], -0.444063], ['<=', ['get', 'FNI'], -0.206439]], "#5cd6ff",
+          ['all', ['>=', ['get', 'FNI'], -0.206438], ['<=', ['get', 'FNI'], 0.065833]], "#FFE4C4",
+          ['all', ['>=', ['get', 'FNI'], 0.065834], ['<=', ['get', 'FNI'], 0.454639]], "#ff968f",
+          ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
+          "#A1A3A9"
+        ],
+        "fill-opacity": 0.8
+      },
+      filter: ["==", ["get", "GEOID20"], ""],
+      interactive: true
+    });
+    map.addLayer({
+      id: "fni-NE-hover",
+      type: "fill",
+      source: 'fni-NE',
+      "source-layer": 'FNI_NE-at1aog',
+      paint: {
+        "fill-outline-color": "transparent",
+        "fill-color": [
+          "case",
+          ['all', ['==', ['get', 'FNI'], null], ['==', ['get', 'FNI'], null]], "#000000",
+          ['all', ['>=', ['get', 'FNI'], -1.085833], ['<=', ['get', 'FNI'], -0.444064]], "#2670c5",
+          ['all', ['>=', ['get', 'FNI'], -0.444063], ['<=', ['get', 'FNI'], -0.206439]], "#5cd6ff",
+          ['all', ['>=', ['get', 'FNI'], -0.206438], ['<=', ['get', 'FNI'], 0.065833]], "#FFE4C4",
+          ['all', ['>=', ['get', 'FNI'], 0.065834], ['<=', ['get', 'FNI'], 0.454639]], "#ff968f",
+          ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
+          "#A1A3A9"
+        ],
+        "fill-opacity": 0.8
+      },
+      filter: ["==", ["get", "GEOID20"], ""],
+      interactive: true
+    });
+    map.addLayer({
+      id: "fni-GLakes-hover",
+      type: "fill",
+      source: 'fni-GLakes',
+      "source-layer": 'FNI_GLakes-8wt2ot',
+      paint: {
+        "fill-outline-color": "transparent",
+        "fill-color": [
+          "case",
+          ['all', ['==', ['get', 'FNI'], null], ['==', ['get', 'FNI'], null]], "#000000",
+          ['all', ['>=', ['get', 'FNI'], -1.085833], ['<=', ['get', 'FNI'], -0.444064]], "#2670c5",
+          ['all', ['>=', ['get', 'FNI'], -0.444063], ['<=', ['get', 'FNI'], -0.206439]], "#5cd6ff",
+          ['all', ['>=', ['get', 'FNI'], -0.206438], ['<=', ['get', 'FNI'], 0.065833]], "#FFE4C4",
+          ['all', ['>=', ['get', 'FNI'], 0.065834], ['<=', ['get', 'FNI'], 0.454639]], "#ff968f",
+          ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
+          "#A1A3A9"
+        ],
+        "fill-opacity": 0.8
+      },
+      filter: ["==", ["get", "GEOID20"], ""],
+      interactive: true
+    });
+    map.addLayer({
+      id: "fni-GPlains-hover",
+      type: "fill",
+      source: 'fni-GPlains',
+      "source-layer": 'FNI_GPlains-3ehl8g',
+      paint: {
+        "fill-outline-color": "transparent",
+        "fill-color": [
+          "case",
+          ['all', ['==', ['get', 'FNI'], null], ['==', ['get', 'FNI'], null]], "#000000",
+          ['all', ['>=', ['get', 'FNI'], -1.085833], ['<=', ['get', 'FNI'], -0.444064]], "#2670c5",
+          ['all', ['>=', ['get', 'FNI'], -0.444063], ['<=', ['get', 'FNI'], -0.206439]], "#5cd6ff",
+          ['all', ['>=', ['get', 'FNI'], -0.206438], ['<=', ['get', 'FNI'], 0.065833]], "#FFE4C4",
+          ['all', ['>=', ['get', 'FNI'], 0.065834], ['<=', ['get', 'FNI'], 0.454639]], "#ff968f",
+          ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
+          "#A1A3A9"
+        ],
+        "fill-opacity": 0.8
+      },
+      filter: ["==", ["get", "GEOID20"], ""],
+      interactive: true
+    });
+    map.addLayer({
+      id: "fni-MidAtl-hover",
+      type: "fill",
+      source: 'fni-MidAtl',
+      "source-layer": 'FNI_MidAtl-47pwlh',
+      paint: {
+        "fill-outline-color": "transparent",
+        "fill-color": [
+          "case",
+          ['all', ['==', ['get', 'FNI'], null], ['==', ['get', 'FNI'], null]], "#000000",
+          ['all', ['>=', ['get', 'FNI'], -1.085833], ['<=', ['get', 'FNI'], -0.444064]], "#2670c5",
+          ['all', ['>=', ['get', 'FNI'], -0.444063], ['<=', ['get', 'FNI'], -0.206439]], "#5cd6ff",
+          ['all', ['>=', ['get', 'FNI'], -0.206438], ['<=', ['get', 'FNI'], 0.065833]], "#FFE4C4",
+          ['all', ['>=', ['get', 'FNI'], 0.065834], ['<=', ['get', 'FNI'], 0.454639]], "#ff968f",
+          ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
+          "#A1A3A9"
+        ],
+        "fill-opacity": 0.8
+      },
+      filter: ["==", ["get", "GEOID20"], ""],
+      interactive: true
+    });
+    map.addLayer({
+      id: "fni-South-hover",
+      type: "fill",
+      source: 'fni-South',
+      "source-layer": 'FNI_SOUTH-8olszi',
+      paint: {
+        "fill-outline-color": "transparent",
+        "fill-color": [
+          "case",
+          ['all', ['==', ['get', 'FNI'], null], ['==', ['get', 'FNI'], null]], "#000000",
+          ['all', ['>=', ['get', 'FNI'], -1.085833], ['<=', ['get', 'FNI'], -0.444064]], "#2670c5",
+          ['all', ['>=', ['get', 'FNI'], -0.444063], ['<=', ['get', 'FNI'], -0.206439]], "#5cd6ff",
+          ['all', ['>=', ['get', 'FNI'], -0.206438], ['<=', ['get', 'FNI'], 0.065833]], "#FFE4C4",
+          ['all', ['>=', ['get', 'FNI'], 0.065834], ['<=', ['get', 'FNI'], 0.454639]], "#ff968f",
+          ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
+          "#A1A3A9"
+        ],
+        "fill-opacity": 0.8
+      },
+      filter: ["==", ["get", "GEOID20"], ""],
+      interactive: true
+    });
+    map.addLayer({
+      id: "fni-Gulf-hover",
+      type: "fill",
+      source: 'fni-Gulf',
+      "source-layer": 'FNI_Gulf-1va4rd',
+      paint: {
+        "fill-outline-color": "transparent",
+        "fill-color": [
+          "case",
+          ['all', ['==', ['get', 'FNI'], null], ['==', ['get', 'FNI'], null]], "#000000",
+          ['all', ['>=', ['get', 'FNI'], -1.085833], ['<=', ['get', 'FNI'], -0.444064]], "#2670c5",
+          ['all', ['>=', ['get', 'FNI'], -0.444063], ['<=', ['get', 'FNI'], -0.206439]], "#5cd6ff",
+          ['all', ['>=', ['get', 'FNI'], -0.206438], ['<=', ['get', 'FNI'], 0.065833]], "#FFE4C4",
+          ['all', ['>=', ['get', 'FNI'], 0.065834], ['<=', ['get', 'FNI'], 0.454639]], "#ff968f",
+          ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
+          "#A1A3A9"
+        ],
+        "fill-opacity": 0.8
+      },
+      filter: ["==", ["get", "GEOID20"], ""],
+      interactive: true
+    });
+    map.addLayer({
+      id: "fni-Pacific-hover",
+      type: "fill",
+      source: 'fni-Pacific',
+      "source-layer": 'FNI_Pacific-3tfeid',
+      paint: {
+        "fill-outline-color": "transparent",
+        "fill-color": [
+          "case",
+          ['all', ['==', ['get', 'FNI'], null], ['==', ['get', 'FNI'], null]], "#000000",
+          ['all', ['>=', ['get', 'FNI'], -1.085833], ['<=', ['get', 'FNI'], -0.444064]], "#2670c5",
+          ['all', ['>=', ['get', 'FNI'], -0.444063], ['<=', ['get', 'FNI'], -0.206439]], "#5cd6ff",
+          ['all', ['>=', ['get', 'FNI'], -0.206438], ['<=', ['get', 'FNI'], 0.065833]], "#FFE4C4",
+          ['all', ['>=', ['get', 'FNI'], 0.065834], ['<=', ['get', 'FNI'], 0.454639]], "#ff968f",
+          ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
+          "#A1A3A9"
+        ],
+        "fill-opacity": 0.8
+      },
+      filter: ["==", ["get", "GEOID20"], ""],
+      interactive: true
+    });
+    map.addLayer({
+      id: "fni-Rockies-hover",
+      type: "fill",
+      source: 'fni-Rockies',
+      "source-layer": 'FNI_Rockies-cwqx74',
+      paint: {
+        "fill-outline-color": "transparent",
+        "fill-color": [
+          "case",
+          ['all', ['==', ['get', 'FNI'], null], ['==', ['get', 'FNI'], null]], "#000000",
+          ['all', ['>=', ['get', 'FNI'], -1.085833], ['<=', ['get', 'FNI'], -0.444064]], "#2670c5",
+          ['all', ['>=', ['get', 'FNI'], -0.444063], ['<=', ['get', 'FNI'], -0.206439]], "#5cd6ff",
+          ['all', ['>=', ['get', 'FNI'], -0.206438], ['<=', ['get', 'FNI'], 0.065833]], "#FFE4C4",
+          ['all', ['>=', ['get', 'FNI'], 0.065834], ['<=', ['get', 'FNI'], 0.454639]], "#ff968f",
+          ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
+          "#A1A3A9"
+        ],
+        "fill-opacity": 0.8
+      },
+      filter: ["==", ["get", "GEOID20"], ""],
+      interactive: true
+    });
+    map.addLayer({
+      id: "fni-CA-hover",
+      type: "fill",
+      source: 'fni-CA',
+      "source-layer": 'FNI_CA-2soszg',
+      paint: {
+        "fill-outline-color": "transparent",
+        "fill-color": [
+          "case",
+          ['all', ['==', ['get', 'FNI'], null], ['==', ['get', 'FNI'], null]], "#000000",
+          ['all', ['>=', ['get', 'FNI'], -1.085833], ['<=', ['get', 'FNI'], -0.444064]], "#2670c5",
+          ['all', ['>=', ['get', 'FNI'], -0.444063], ['<=', ['get', 'FNI'], -0.206439]], "#5cd6ff",
+          ['all', ['>=', ['get', 'FNI'], -0.206438], ['<=', ['get', 'FNI'], 0.065833]], "#FFE4C4",
+          ['all', ['>=', ['get', 'FNI'], 0.065834], ['<=', ['get', 'FNI'], 0.454639]], "#ff968f",
+          ['all', ['>=', ['get', 'FNI'], 0.454640], ['<=', ['get', 'FNI'], 12.080347]], "#c31f13",
+          "#A1A3A9"
+        ],
+        "fill-opacity": 0.8
+      },
+      filter: ["==", ["get", "GEOID20"], ""],
+      interactive: true
+    });
     
     // Move layers below default road and label layers.
     map.moveLayer('fni-null', 'road-label');
@@ -533,6 +755,36 @@ map.on('load', function () {
       });
     });
     
+    var hoverIds = ['fni-NE-hover', 'fni-null-hover', 'fni-GLakes-hover', 'fni-GPlains-hover', 'fni-MidAtl-hover', 'fni-South-hover', 'fni-Gulf-hover', 'fni-Pacific-hover', 'fni-Rockies-hover', 'fni-CA-hover'];
+
+    // Loop over the array of layer IDs and add the event listeners to each layer.
+    hoverIds.forEach(function(hoverId) {
+      // Add a mouseenter event listener to the layer.
+      map.on('mousemove', hoverId, function(e) {
+        // Get the features that are currently being rendered at the mouse pointer
+        var features = map.queryRenderedFeatures(e.point, { layers: [hoverId] });
+
+        // Change the cursor style to "pointer" if the mouse pointer is over a tract feature
+        map.getCanvas().style.cursor = (features.length) ? "pointer" : "";
+
+        // Update the filter for the hover layer to show the selected tract feature
+        if (features.length) {
+          map.setFilter(hoverId, ["==", ["get", "GEOID20"], features[0].properties.GEOID20]);
+        } else {
+          map.setFilter(hoverId, ["==", ["get", "GEOID20"], ""]);
+        }
+      });
+
+      // Add a mouseleave event listener to the layer.
+      map.on('mouseleave', hoverId, function() {
+        // Reset the filter for the hover layer
+        map.setFilter(hoverId, ["==", ["get", "GEOID20"], ""]);
+
+        // Reset the cursor style
+        map.getCanvas().style.cursor = "";
+      });
+    });
+
     // Add in option for full-screen.
     map.addControl(new mapboxgl.FullscreenControl());
 
